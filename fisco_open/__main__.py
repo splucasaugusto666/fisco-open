@@ -1,11 +1,12 @@
 import argparse,json,sys
 from pathlib import Path
 from .engine import calculate,compare
+from .factor_r import factor_r
 from .rtc import request_rtc,UPSTREAM
 
 def main():
     p=argparse.ArgumentParser(description='FISCO OPEN research preview')
-    p.add_argument('command',choices=['calculate','compare','rtc-regular','rtc-simples','upstream'])
+    p.add_argument('command',choices=['calculate','compare','factor-r','rtc-regular','rtc-simples','upstream'])
     p.add_argument('file',nargs='?'); p.add_argument('--port',type=int)
     a=p.parse_args()
     try:
@@ -17,6 +18,7 @@ def main():
             data=json.loads(path.read_text(encoding='utf-8'))
             if a.command=='calculate': result=calculate(data)
             elif a.command=='compare': result=compare(data)
+            elif a.command=='factor-r': result=factor_r(data)
             else: result=request_rtc(a.command[4:],data,a.port)
         print(json.dumps(result,ensure_ascii=False,indent=2)); return 0
     except (ValueError,TypeError,OSError,KeyError,ArithmeticError) as e:
