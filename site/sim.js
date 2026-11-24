@@ -28,5 +28,8 @@ if(typeof document!=='undefined') {
     }
   }
   form.addEventListener('submit',e=>{e.preventDefault();render()});
+  const button=document.getElementById('compare');
+  button.addEventListener('click',()=>{if(form.reportValidity()) render()});
+  button.disabled=false;
   render();
 }
