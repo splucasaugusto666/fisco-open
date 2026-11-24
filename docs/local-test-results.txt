@@ -1,0 +1,14 @@
+test_boundary (test_engine.Engine.test_boundary) ... ok
+test_compare (test_engine.Engine.test_compare) ... ok
+test_evidence (test_engine.Engine.test_evidence) ... ok
+test_golden (test_engine.Engine.test_golden) ... ok
+test_no_false_eligibility (test_engine.Engine.test_no_false_eligibility) ... ok
+test_other_annex (test_engine.Engine.test_other_annex) ... ok
+test_reject (test_engine.Engine.test_reject) ... ok
+test_zero_revenue (test_engine.Engine.test_zero_revenue) ... ok
+test_transport (test_engine.MockRTC.test_transport) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.522s
+
+OK

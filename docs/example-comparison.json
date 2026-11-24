@@ -1,0 +1,36 @@
+{
+  "status": "hypothetical_comparison",
+  "engine_version": "0.1.0a1",
+  "scenarios": [
+    {
+      "name": "Alternativa hipotética",
+      "net_brl": "29500.00",
+      "inputs": {
+        "name": "Alternativa hipotética",
+        "revenue": "80000",
+        "costs": "30000",
+        "expenses": "12000",
+        "taxes": "6000",
+        "other_obligations": "2000",
+        "implementation_cost": "500",
+        "eligibility_confirmed": true
+      }
+    },
+    {
+      "name": "Base hipotética",
+      "net_brl": "28000.00",
+      "inputs": {
+        "name": "Base hipotética",
+        "revenue": "80000",
+        "costs": "30000",
+        "expenses": "12000",
+        "taxes": "8000",
+        "other_obligations": "2000",
+        "implementation_cost": "0",
+        "eligibility_confirmed": true
+      }
+    }
+  ],
+  "limitation": "Inputs and eligibility externally supplied; no regime recommendation. Compare equal time horizons and avoid double counting.",
+  "evidence_sha256": "f900f1b91484c32c846bf86d63ffd1731fee27d2833591a1275d477553eadb89"
+}

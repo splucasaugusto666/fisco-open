@@ -1,0 +1,38 @@
+{
+  "status": "experimental_estimate",
+  "engine_version": "0.1.0a1",
+  "inputs": {
+    "period": "2025-11-01",
+    "annex": "I",
+    "rbt12": "960000.00",
+    "revenue": "80000.00",
+    "assumptions": {
+      "confirmed_eligible": true,
+      "confirmed_annex": true,
+      "established_business": true,
+      "single_domestic_revenue": true,
+      "no_special_treatment": true,
+      "below_applicable_limits": true
+    }
+  },
+  "rule_id": "BR-SN-I-2025-4",
+  "source": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm",
+  "provision": "LC 123/2006 art. 18 and Annex I",
+  "jurisdiction": "BR",
+  "supported_period": [
+    "2025-01-01",
+    "2025-12-31"
+  ],
+  "nominal_rate": "0.107",
+  "deduction_brl": "22500.00",
+  "effective_rate": "0.0835625",
+  "estimated_das_brl": "6685.00",
+  "rounding": "final cent HALF_UP; allocation not reproduced",
+  "limitations": [
+    "No eligibility determination",
+    "No tax segregation or special treatments",
+    "No PGDAS-D parity or professional validation",
+    "No official RTC engine used in this calculation"
+  ],
+  "evidence_sha256": "e99380801a4acb26adbc8e30899baedbc1265cf60d8259aba589d83f204c68a8"
+}

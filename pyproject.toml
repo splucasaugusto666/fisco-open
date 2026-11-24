@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "fisco-open"
+version = "0.1.0a1"
+description = "Experimental Brazilian tax evidence and business simulation engine"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+readme = "README.md"
+[project.scripts]
+fisco-open = "fisco_open.__main__:main"
+[tool.setuptools.packages.find]
+include = ["fisco_open*"]
