@@ -4,13 +4,13 @@
 </style></head><body><header><span class="brand">FISCO OPEN</span><a href="https://github.com/splucasaugusto666/fisco-open">Código no GitHub</a></header><main>
 <p class="eyebrow">Open source / Research Preview / v0.1.0-alpha</p><h1>Pague o imposto devido.<br>Nem um centavo a mais.</h1><p class="muted">Inteligência econômica aberta para empreendedores brasileiros. Compare cenários de lucro com valores que você já conhece, sem enviar informações ao servidor.</p><a class="button" href="https://github.com/splucasaugusto666/fisco-open/releases/tag/v0.1.0-alpha">Acessar release pública</a>
 <section><h2>Simulador econômico</h2><p class="muted">Valores ilustrativos em reais por mês. Informe os tributos já estimados externamente; esta ferramenta não calcula o imposto devido nem determina elegibilidade. Não duplique custos e compare períodos equivalentes.</p>
-<form id="sim"><div class="fields">
+<form id="sim" method="dialog"><div class="fields">
 <label>Faturamento<input name="revenue" inputmode="decimal" value="80000,00" required></label>
 <label>Custos, despesas e outras obrigações<input name="costs" inputmode="decimal" value="44000,00" required></label>
 <label>Tributos atuais<input name="tax" inputmode="decimal" value="8000,00" required></label>
 <label>Tributos alternativos<input name="alt" inputmode="decimal" value="6000,00" required></label>
 <label>Custo mensal adicional da alternativa<input name="extra" inputmode="decimal" value="500,00" required></label>
-</div><p><button type="submit">Comparar cenários</button></p></form>
+</div><p><button type="button" id="compare" disabled>Comparar cenários</button></p></form><noscript><p>Ative o JavaScript para calcular localmente. Nenhum valor será enviado.</p></noscript>
 <p class="error" id="error" role="alert"></p><div class="results" aria-live="polite"><div class="result">Lucro atual<strong id="base">—</strong></div><div class="result">Lucro alternativo<strong id="alternative">—</strong></div><div class="result">Diferença mensal<strong id="gain">—</strong></div><div class="result">Projeção anual constante<strong id="annual">—</strong></div></div><p><small>Projeção anual = diferença mensal × 12, sem sazonalidade. Não é garantia de economia.</small></p></section>
 <section><h2>O que está disponível</h2><p>CLI Python, estimativas históricas parciais do Simples Nacional para 2025, Fator R histórico, comparação financeira, evidências reproduzíveis e BOTBench. Adaptadores locais da RTC foram testados com serviços simulados.</p><p>Não há cálculo validado para 2026, paridade oficial, validação profissional independente ou cobertura de todos os regimes. Este projeto não é afiliado à Receita Federal e não substitui a orientação contábil.</p><a href="https://github.com/splucasaugusto666/fisco-open/blob/main/README.pt-BR.md">Leia a documentação e as limitações</a></section></main><footer><small>FISCO OPEN • MIT • Processamento da simulação no navegador. Não são utilizados serviços de análise nem armazenamento dos dados pelo aplicativo.</small></footer>
 <script src="sim.js" defer></script></body></html>
