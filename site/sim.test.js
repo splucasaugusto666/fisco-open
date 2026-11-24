@@ -1,0 +1,10 @@
+'use strict';
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const {cents,simulate,brl}=require('./sim.js');
+const input={revenue:'80000,00',costs:'44000,00',tax:'8000,00',alt:'6000,00',extra:'500,00'};
+test('exact cents and comma/dot',()=>{assert.equal(cents('0,01'),1n);assert.equal(cents('12.3'),1230n)});
+test('invalid amounts',()=>{for(const v of ['','-1','1e3','1.001','NaN','1,2.3','1000000000000']) assert.throws(()=>cents(v))});
+test('illustrative scenario',()=>assert.deepEqual(simulate(input),{base:2800000n,alternative:2950000n,gain:150000n,annual:1800000n}));
+test('negative gain and loss',()=>{const r=simulate({...input,revenue:'0',extra:'3000'});assert.equal(r.base,-5200000n);assert.equal(r.gain,-100000n)});
+test('formatted cents',()=>{assert.equal(brl(-100001n),'-R$ 1.000,01');assert.equal(brl(0n),'R$ 0,00')});
