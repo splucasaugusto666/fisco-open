@@ -8,6 +8,8 @@ description = "Experimental Brazilian tax evidence and business simulation engin
 requires-python = ">=3.10"
 license = {text = "MIT"}
 readme = "README.md"
+[project.optional-dependencies]
+mcp = ["mcp==1.30.0"]
 [project.scripts]
 fisco-open = "fisco_open.__main__:main"
 [tool.setuptools.packages.find]
