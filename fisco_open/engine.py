@@ -10,6 +10,8 @@ SOURCE = 'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm'
 LIMITS = tuple(map(D, ('180000','360000','720000','1800000')))
 TABLE = {'I': [('0.04','0'),('0.073','5940'),('0.095','13860'),('0.107','22500')],
          'II': [('0.045','0'),('0.078','5940'),('0.10','13860'),('0.112','22500')],
+         'III': [('0.06','0'),('0.112','9360'),('0.135','17640'),('0.16','35640')],
+         'IV': [('0.045','0'),('0.09','8100'),('0.102','12420'),('0.14','39780')],
          'V': [('0.155','0'),('0.18','4500'),('0.195','9900'),('0.205','17100')]}
 ASSUMPTIONS = ('confirmed_eligible','confirmed_annex','established_business','single_domestic_revenue','no_special_treatment','below_applicable_limits')
 def money(value):
@@ -43,6 +45,8 @@ def calculate(inputs):
         # Round at final estimate only, not a PGDAS-D allocation replica.
         total=rounded(revenue*(r*nominal-deduction)/r)
         result={'status':'experimental_estimate','engine_version':__version__,'inputs':inputs,'rule_id':f'BR-SN-{a}-2025-{i+1}', 'source':SOURCE,'provision':f'LC 123/2006 art. 18 and Annex {a}','jurisdiction':'BR','supported_period':['2025-01-01','2025-12-31'],'nominal_rate':str(nominal),'deduction_brl':rounded(deduction),'effective_rate':str(rate),'estimated_das_brl':total,'rounding':'final cent HALF_UP; allocation not reproduced','limitations':['No eligibility determination','No tax segregation or special treatments','No PGDAS-D parity or professional validation','No official RTC engine used in this calculation']}
+    if a == 'IV':
+        result['limitations'].append('Annex IV DAS excludes employer social security contributions (CPP); total burden is not calculated')
     return {**result,'evidence_sha256':evidence(result)}
 
 def compare(scenarios):

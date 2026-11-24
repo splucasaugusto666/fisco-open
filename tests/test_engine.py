@@ -15,7 +15,7 @@ class Engine(unittest.TestCase):
         self.assertEqual(calculate(dict(BASE,annex='V',rbt12='180000',revenue='10000'))['estimated_das_brl'],'1550.00')
         self.assertEqual(calculate(dict(BASE,annex='II',rbt12='180000',revenue='10000'))['estimated_das_brl'],'450.00')
     def test_reject(self):
-        for k,v in [('period','2026-01-01'),('rbt12','0'),('rbt12','1800000.01'),('revenue','NaN'),('revenue',1.0),('revenue','-1'),('revenue','1.001'),('annex','III'),('assumptions',{})]:
+        for k,v in [('period','2026-01-01'),('rbt12','0'),('rbt12','1800000.01'),('revenue','NaN'),('revenue',1.0),('revenue','-1'),('revenue','1.001'),('annex','VI'),('assumptions',{})]:
             with self.subTest(k=k,v=v),self.assertRaises(ValueError): calculate(dict(BASE,**{k:v}))
     def test_no_false_eligibility(self):
         b=copy.deepcopy(BASE); b['assumptions']['confirmed_eligible']=False

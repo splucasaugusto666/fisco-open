@@ -13,7 +13,7 @@ python -m fisco_open upstream
 python -m unittest discover -s tests -v
 ```
 
-Version `0.1.0a1` — research preview, not a tax filing tool. Historical 2025 estimates for ordinary domestic single-revenue Simples scenarios, Annexes I, II and V, first four bands only. Eligibility and scope conditions must be confirmed externally. No PGDAS-D parity, no current-year or professional validation. Scenario ranking uses supplied amounts, not inferred eligibility. No unknown taxes represented as zero.
+Version `0.1.0a1` — research preview, not a tax filing tool. Historical 2025 estimates for ordinary domestic single-revenue Simples scenarios, Annexes I–V, first four bands only. Eligibility and scope conditions must be confirmed externally. No PGDAS-D parity, no current-year or professional validation. Scenario ranking uses supplied amounts, not inferred eligibility. No unknown taxes represented as zero.
 
 ## Official RTC integration
 
@@ -31,8 +31,12 @@ Evidence digests detect changes to serialized records; they do not prove correct
 
 ## Roadmap
 
-- Independent accountant review, verified current-period rules, annex III/IV and revenue segregation.
+- Independent accountant review, verified current-period rules, and revenue segregation.
 - Run pinned official services, validate request/response schemas and add differential fixtures.
 - Expand geography/regimes, reform simulation, rule specification, API and MCP.
 
 MIT; see LICENSE and NOTICE. Contributions with official sources and reproducible tests welcome. No official endorsement implied.
+
+### Historical factor R
+
+`python -m fisco_open factor-r examples/factor-r.json` classifies confirmed eligible activities with full prior 12-month history into Annex III or V. It does not determine activity eligibility or automatically change the annex used by `calculate`. Annex IV DAS excludes employer CPP; total burden is not calculated. 2026 rules remain unsupported. See [LC 123](https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm) and [CGSN 140 art. 26](https://normas.receita.fazenda.gov.br/sijut2consulta/link.action?idAto=92278).
