@@ -1,0 +1,82 @@
+name: Publish v0.1.0-alpha
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/release-alpha.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: fisco-open-v0.1.0-alpha
+  cancel-in-progress: false
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: b2d1012c2a8066254b370401aca453d3426d7be7
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -v
+      - run: |
+          python -m fisco_open calculate examples/commerce.json > evidence.json
+          python -m fisco_open.verify evidence.json
+          python -m fisco_open factor-r examples/factor-r.json
+          python -m fisco_open compare examples/scenarios.json
+  publish:
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TAG: v0.1.0-alpha
+      TARGET: b2d1012c2a8066254b370401aca453d3426d7be7
+    steps:
+      - name: Publish research preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo "Release already exists; refusing to overwrite."
+            exit 0
+          fi
+          if gh api "repos/$GH_REPO/git/ref/tags/$TAG" >/dev/null 2>&1; then
+            echo "Tag already exists; refusing to publish without manual verification."
+            exit 1
+          fi
+          cat > notes.md <<'EOF'
+          # FISCO OPEN — primeira pré-release pública
+
+          Motor experimental de inteligência tributária brasileira e simulação financeira.
+          - CLI Python 3.10+ sem dependências de execução.
+          - Estimativa histórica de 2025: anexos I a V do Simples, primeiras quatro faixas.
+          - Fator R para atividades e histórico previamente confirmados.
+          - Comparação de cenários fornecidos pelo usuário.
+          - Evidências SHA-256, verificação de integridade e reprodução determinística.
+          - BOTBench inicial: 240 subcasos sintéticos.
+          - Adaptadores HTTP locais para RTC; testados apenas com serviços simulados.
+
+          **Research Preview:** não calcula tributos para recolhimento, não determina elegibilidade, não cobre 2026, não possui paridade comprovada com PGDAS-D ou RTC nem validação profissional independente. Não é produto oficial da Receita Federal.
+
+          Extraia o código-fonte e execute:
+          ```sh
+          python -m unittest discover -s tests -v
+          python -m fisco_open calculate examples/commerce.json
+          python -m fisco_open factor-r examples/factor-r.json
+          python -m fisco_open compare examples/scenarios.json
+          ```
+
+          Licença MIT. Feedback e contribuições são bem-vindos.
+          EOF
+          gh release create "$TAG" --repo "$GH_REPO" --target "$TARGET" --title "FISCO OPEN v0.1.0-alpha | Research Preview" --prerelease --notes-file notes.md
+          gh release view "$TAG" --repo "$GH_REPO" --json url,isPrerelease,tagName,targetCommitish
